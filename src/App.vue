@@ -11,7 +11,20 @@ Creare un componente loader da visualizzare fintantoché i risultati non sono pr
 
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from './components/HelloWorld.vue';
+import { store } from './store.js';
+
+export default {
+  name: "App",
+  components: {
+    HelloWorld
+  },
+  data() {
+    return {
+      store
+    }
+  }
+}
 </script>
 
 <template>
@@ -22,7 +35,7 @@ import HelloWorld from './components/HelloWorld.vue'
           src="https://w7.pngwing.com/pngs/88/896/png-transparent-rick-and-morty-text-overlay-rick-sanchez-the-art-of-rick-and-morty-rick-and-morty-season-3-the-rickshank-rickdemption-animated-series-others-television-blue-comics.png"
           alt="">
       </div>
-      <h1>Rick and Morty Api</h1>
+      <h1>{{ store.titolo }}</h1>
     </div>
     <div class="fascia">
 
@@ -38,11 +51,16 @@ import HelloWorld from './components/HelloWorld.vue'
 
         </div>
         <div class="finestra">
+          <!-- <HelloWorld :msg="store.characterList.length" /> -->
+
+          <!-- 2:07 della registraz -->
+
 
         </div>
       </div>
     </div>
-    <HelloWorld />
+
+
   </div>
 </template>
 
