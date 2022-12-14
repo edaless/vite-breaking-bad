@@ -10,7 +10,7 @@ Creare un componente loader da visualizzare fintantoché i risultati non sono pr
 -->
 
 
-<script setup>
+<script>
 import HelloWorld from './components/HelloWorld.vue'
 </script>
 
@@ -47,6 +47,11 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <style lang="scss" scoped>
+@use './style/general.scss';
+
+
+
+
 #cont {
   background-color: #323c48;
   display: flex;
