@@ -23,6 +23,24 @@ export default {
     return {
       store
     }
+  },
+  // controllare methods e mounted
+  methods: {
+    getCharacters() {
+      axios
+        .get(store.apiURL)
+        .then(res => {
+          store.characterList = res.data.results;
+          // store.characterList = res.data.response;
+          console.log(store.characterList)
+        })
+        .catch(err => {
+          console.log("errori", err)
+        });
+    }
+  },
+  mounted() {
+    this.getCharacters();
   }
 }
 </script>
@@ -31,11 +49,9 @@ export default {
   <div id="cont">
     <div id="titolo">
       <div class="logo">
-        <img
-          src="https://w7.pngwing.com/pngs/88/896/png-transparent-rick-and-morty-text-overlay-rick-sanchez-the-art-of-rick-and-morty-rick-and-morty-season-3-the-rickshank-rickdemption-animated-series-others-television-blue-comics.png"
-          alt="">
+        <img src="https://cdn.shopify.com/s/files/1/0014/2491/6549/collections/R_M_collab_logo.jpg?v=1623834373" alt="">
       </div>
-      <h1>{{ store.titolo }}</h1>
+      <h2>{{ store.titolo }}</h2>
     </div>
     <div class="fascia">
 
@@ -84,8 +100,8 @@ export default {
   align-items: center;
   // background-color: brown;
 
-  h1 {
-    margin: 0 20px;
+  h2 {
+    margin: 0 15px;
     color: white;
   }
 }
