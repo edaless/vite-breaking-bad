@@ -27,16 +27,27 @@ export default {
 
   methods: {
     getCharacters() {
+      // chiamata api, avverrà appena finito di caricare il sito e 
+      // quando si cambia il valore del menù a tendina
+      let aggiunta = "";
+      // stringa vuota che verrà aggiunta all'url dell'api,
+      // non necessariamente riempita (se voglio tutti i personaggi)
+
+      // se è stato richiesto uno status preciso aggiorno la AGGIUNTA con la stringa necessaria
+      if (store.statusSelected !== "") {
+        aggiunta = "?status=" + store.statusSelected;
+      };
+
       axios
-        .get(store.apiURL)
+        .get(store.apiURL + aggiunta)
         .then(res => {
           store.characterList = res.data.results;
-          // store.characterList = res.data.response;
-          console.log(store.characterList)
+          // riempo l'array dello store con i risultati della chiamata api
         })
         .catch(err => {
           console.log("errori", err)
         });
+
     }
   },
   mounted() {
@@ -58,12 +69,14 @@ export default {
       <div class="console">
         <div class="input">
 
+          <!-- menù a tendina che al click fa una nuova chiamata api -->
+          <select id="status" v-model="store.statusSelected" @click="getCharacters()">
+            <option value="">all</option>
+            <option value="alive">alive</option>
+            <option value="dead">dead</option>
+            <option value="unknown">unknown</option>
 
-          <div class="categorie">
-            select category
-
-            <i class="fa-solid fa-chevron-down"></i>
-          </div>
+          </select>
 
         </div>
         <div class="finestra">
@@ -137,25 +150,11 @@ export default {
   display: flex;
   flex-direction: column;
 
-  .input {
-    padding: 10px;
-
-    .categorie {
-      background-color: #fefefd;
-      border: 1px solid #d2d6da;
-      padding: 3px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100px;
-      font-size: 10px;
-      color: rgb(102, 102, 102);
-      border-radius: 4px;
-
-      i {
-        font-size: 6px;
-      }
-    }
+  select {
+    padding: 5px;
+    font-size: 11px;
+    margin: 15px 5px;
+    font-weight: 500;
   }
 }
 
