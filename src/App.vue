@@ -11,20 +11,20 @@ Creare un componente loader da visualizzare fintantoché i risultati non sono pr
 
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import Character from './components/Character.vue';
 import { store } from './store.js';
 
 export default {
   name: "App",
   components: {
-    HelloWorld
+    Character
   },
   data() {
     return {
       store
     }
   },
-  // controllare methods e mounted
+
   methods: {
     getCharacters() {
       axios
@@ -67,7 +67,15 @@ export default {
 
         </div>
         <div class="finestra">
-          <!-- <HelloWorld :msg="store.characterList.length" /> -->
+          <div class="barra-risultati">
+            Found {{ store.characterList.length }} characters
+          </div>
+          <!-- <Character :msg="store.characterList[0].name" /> -->
+          <div id="lista-personaggi">
+            <Character v-for="(character, index) in store.characterList" :msg="store.characterList[index]" />
+
+          </div>
+
 
           <!-- 2:07 della registraz -->
 
@@ -90,15 +98,14 @@ export default {
   background-color: #323c48;
   display: flex;
   flex-direction: column;
-  min-width: 100vw;
-  min-height: 100vh;
+  // min-width: 100vw;
+  // min-height: 100vh;
 }
 
 #titolo {
   padding: 10px;
   display: flex;
   align-items: center;
-  // background-color: brown;
 
   h2 {
     margin: 0 15px;
@@ -107,13 +114,10 @@ export default {
 }
 
 .logo {
-  // width: 50px;
   height: 50px;
-  background-color: red;
   display: flex;
   align-items: center;
   justify-content: center;
-  // overflow: hidden;
 
   img {
     width: auto;
@@ -122,21 +126,16 @@ export default {
 }
 
 .fascia {
-  // height: 100%;
-
-  background-color: aqua;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .console {
-  width: 600px;
-  height: 400px;
+  width: 700px;
+  // height: 400px;
   display: flex;
   flex-direction: column;
-  // align-items: center;
-  background-color: rgb(255, 170, 127);
 
   .input {
     padding: 10px;
@@ -162,8 +161,29 @@ export default {
 
 .finestra {
   width: 100%;
-  height: 100%;
-  // overflow: scroll;
+  // height: 100%;
+  padding: 30px 30px 10px 30px;
+  display: flex;
+  flex-direction: column;
+
   background-color: rgb(255, 255, 255);
+}
+
+.barra-risultati {
+  background-color: #26292d;
+  display: flex;
+  align-items: center;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  height: 38px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+#lista-personaggi {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 </style>
