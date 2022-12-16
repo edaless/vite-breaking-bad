@@ -34,7 +34,8 @@ $w-Card : 130px;
     align-items: center;
     background-color: #323c48;
     width: $w-Card;
-    height: calc($w-Card * 1.5);
+    height: calc($w-Card * 1.6);
+    // con 1.5 le card con un nome che va a capo sarebbero un po' strette
     padding: 10px;
     margin: 10px;
 }
